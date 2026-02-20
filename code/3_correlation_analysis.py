@@ -1,11 +1,3 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-"""
-Created on Fri Feb 20 20:07:36 2026
-
-@author: briangichuhi
-"""
-
 import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
