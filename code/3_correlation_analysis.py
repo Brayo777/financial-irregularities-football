@@ -1,4 +1,14 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+Created on Fri Feb 20 20:07:36 2026
+
+@author: briangichuhi
+"""
+
 import pandas as pd
+import seaborn as sns
+import matplotlib.pyplot as plt
 import numpy as np
 from scipy.stats import pearsonr
 
@@ -71,5 +81,32 @@ print(corr_with_stars)
 
 # Save table
 corr_with_stars.to_csv('../results/correlation_matrix.csv')
+
+# --------- HEATMAP FIGURE ---------
+
+plt.figure(figsize=(10, 8))
+
+# heatmap using actual correlation coefficients
+sns.heatmap(
+    corr_matrix.astype(float),
+    cmap='coolwarm',
+    center=0,
+    annot=True,
+    fmt=".2f",
+    linewidths=0.5
+)
+
+plt.title('Correlation Matrix Heatmap')
+plt.tight_layout()
+
+# save figure
+plt.savefig('../results/correlation_heatmap.png', dpi=300)
+
+# Show inside Python (interactive view)
+plt.show()
+
+plt.close()
+
+print("Correlation heatmap saved to results folder.")
 
 print("\nCorrelation matrix saved to results folder.")
