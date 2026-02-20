@@ -1,12 +1,3 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-
-
-# Correlation Analysis
-# Produces:
-# 1) Correlation matrix with significance stars (CSV)
-# 2) Clean heatmap figure (PNG)
-
 import pandas as pd
 import numpy as np
 import seaborn as sns
@@ -14,12 +5,12 @@ import matplotlib.pyplot as plt
 from scipy.stats import pearsonr
 
 
-# ---------------- LOAD DATA ----------------
+# LOAD DATA
 file_path = '../data/Financial_Irregularities.xlsx'
 data = pd.read_excel(file_path)
 
 
-# ---------------- SELECT VARIABLES ----------------
+# SELECT VARIABLES
 columns = [
     'Financial Irregularities(1=yes,0=no)',
     'League Standing',
@@ -33,7 +24,7 @@ columns = [
 
 df = data[columns].copy()
 
-# Cleaner names
+# Cleaning names
 df.rename(columns={
     'Financial Irregularities(1=yes,0=no)': 'Financial Irregularity',
     'Net Profit Margin(Net profit/operating revenue)': 'Net Profit Margin',
@@ -44,11 +35,11 @@ df.rename(columns={
 }, inplace=True)
 
 
-# ---------------- CORRELATION MATRIX ----------------
+# CORRELATION MATRIX ----------------
 corr_matrix = df.corr()
 
 
-# ---------------- P-VALUE MATRIX ----------------
+# P-VALUE MATRIX
 p_values = pd.DataFrame(
     np.ones((len(df.columns), len(df.columns))),
     columns=df.columns,
@@ -63,8 +54,7 @@ for i in range(len(df.columns)):
         else:
             p_values.iloc[i, j] = np.nan
 
-
-# ---------------- SIGNIFICANCE STARS ----------------
+# SIGNIFICANCE STARS
 stars_matrix = p_values.copy()
 
 for i in range(len(p_values.columns)):
@@ -82,8 +72,7 @@ for i in range(len(p_values.columns)):
         else:
             stars_matrix.iloc[i, j] = ""
 
-
-# ---------------- TABLE WITH STARS ----------------
+# TABLE WITH STARS
 corr_with_stars = corr_matrix.copy()
 
 for i in range(len(corr_matrix.columns)):
@@ -98,8 +87,7 @@ print(corr_with_stars)
 
 corr_with_stars.to_csv('../results/correlation_matrix.csv')
 
-
-# ---------------- HEATMAP (NO NUMBERS) ----------------
+# HEATMAP
 plt.figure(figsize=(11, 9))
 
 sns.heatmap(
