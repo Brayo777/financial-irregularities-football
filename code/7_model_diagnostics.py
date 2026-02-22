@@ -1,4 +1,3 @@
-# MODEL DIAGNOSTICS FOR FIXED EFFECTS PANEL MODEL
 import pandas as pd
 import matplotlib.pyplot as plt
 import statsmodels.api as sm
@@ -35,13 +34,21 @@ data.rename(columns={
     'Goal Ratio(Goals scored/Goals conceded)': 'Goal Ratio'
 }, inplace=True)
 
-# panel index
+# PANEL INDEX
 data['Season'] = data['Season'].map(lambda x: pd.to_datetime('20' + x.split('/')[1] + '-05-31'))
 data.set_index(['Team Name','Season'], inplace=True)
 
 # MODEL
 y = data['League Standing']
-X = data[['Financial Irregularity','Net Profit Margin','Firm Size','Leverage','Growth','Return on Equity','Goal Ratio']]
+
+X = data[['Financial Irregularity',
+          'Net Profit Margin',
+          'Firm Size',
+          'Leverage',
+          'Growth',
+          'Return on Equity',
+          'Goal Ratio']]
+
 X = add_constant(X)
 
 model = PanelOLS(y, X, entity_effects=True)
@@ -58,32 +65,43 @@ plt.xlabel("Fitted values")
 plt.ylabel("Residuals")
 plt.title("Residuals vs Fitted Values (Fixed Effects)")
 plt.tight_layout()
-plt.savefig('../results/residual_plot.png', dpi=300)
+plt.savefig("../results/residual_plot.png", dpi=300)
 plt.close()
 
 print("Residual plot saved.")
 
-# BREUSCH-PAGAN (Heteroskedasticity)
+# BREUSCH-PAGAN TEST
 bp_test = het_breuschpagan(residuals, X)
 bp_pvalue = bp_test[1]
 
-print("Breusch-Pagan p-value:", bp_pvalue)
-
-# SHAPIRO-WILK (Normality)
+# SHAPIRO-WILK TEST
 sample_resid = residuals.sample(min(len(residuals), 5000))
 shapiro_stat, shapiro_p = shapiro(sample_resid)
 
-print("Shapiro-Wilk p-value:", shapiro_p)
-
-# DURBIN-WATSON (Autocorrelation)
+# DURBIN-WATSON TEST
 dw = sm.stats.stattools.durbin_watson(residuals)
-print("Durbin-Watson:", dw)
 
-# SAVE RESULTS
-with open('../results/model_diagnostics.txt', 'w') as f:
-    f.write("MODEL DIAGNOSTICS\n\n")
-    f.write(f"Breusch-Pagan p-value: {bp_pvalue}\n")
-    f.write(f"Shapiro-Wilk p-value: {shapiro_p}\n")
-    f.write(f"Durbin-Watson: {dw}\n")
+# SAVE RAW DIAGNOSTICS TABLE
+diagnostics_table = pd.DataFrame({
+    "Test": [
+        "Durbin-Watson",
+        "Breusch-Pagan p-value",
+        "Shapiro-Wilk p-value"
+    ],
+    "Value": [
+        dw,
+        bp_pvalue,
+        shapiro_p
+    ]
+})
 
-print("Diagnostics saved to results folder.")
+diagnostics_table.to_csv("../results/model_diagnostics.csv", index=False)
+
+print("Model diagnostics table saved to results folder.")
+
+print("\nMODEL DIAGNOSTICS RESULTS")
+print("----------------------------------")
+print(f"Durbin-Watson: {dw}")
+print(f"Breusch-Pagan p-value: {bp_pvalue}")
+print(f"Shapiro-Wilk p-value: {shapiro_p}")
+print("----------------------------------")
