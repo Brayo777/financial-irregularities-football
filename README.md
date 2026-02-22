@@ -35,6 +35,11 @@ A Hausman specification test was conducted to determine whether a fixed-effects 
 The test produced a statistically significant result (p = 0.026), leading to rejection of the null hypothesis. This indicates that unobserved club-specific characteristics are correlated with the explanatory variables. Consequently, the random-effects estimator is inconsistent.
 Therefore, the fixed-effects panel model is the appropriate econometric specification and is used as the primary model in the analysis.
 
+### Model Diagnostics
+Diagnostic tests were performed on the fixed-effects regression residuals. The Breusch–Pagan test did not detect significant heteroskedasticity, and the Durbin–Watson statistic indicated no serial correlation. The Shapiro–Wilk test rejected normality of residuals; however, this is common in micro-panel data and does not invalidate fixed-effects estimation, which relies on large-sample consistency rather than normally distributed errors.
+Overall, the diagnostic results support the validity of the fixed-effects model with robust standard errors.
+
+
 ## Repository Structure
 * `data/` raw dataset
 * `code/` all Python analysis scripts
