@@ -42,6 +42,11 @@ Overall, the diagnostic results support the validity of the fixed-effects model 
 ### Multicollinearity (Variance Inflation Factor)
 A Variance Inflation Factor (VIF) test was conducted to assess multicollinearity among the explanatory variables. All VIF values were below 2, indicating negligible multicollinearity and confirming that the regression coefficients are stable and reliably estimated.
 
+### Main Findings
+The fixed-effects panel estimation indicates that financial irregularities do not have a statistically significant impact on league standing once unobserved club-specific characteristics are controlled for.
+While cross-club differences may exist, within-club variation over time does not support a causal relationship between financial irregularities and short-term competitive performance. Sporting performance variables, particularly goal ratio, remain the strongest and most consistent determinants of league position.
+Robustness checks using clustered standard errors confirm that these results are stable and not sensitive to alternative covariance specifications.
+
 ## Repository Structure
 * `data/` raw dataset
 * `code/` all Python analysis scripts
