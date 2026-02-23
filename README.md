@@ -39,6 +39,8 @@ Therefore, the fixed-effects panel model is the appropriate econometric specific
 Diagnostic tests were performed on the fixed-effects regression residuals. The Breusch–Pagan test did not detect significant heteroskedasticity, and the Durbin–Watson statistic indicated no serial correlation. The Shapiro–Wilk test rejected normality of residuals; however, this is common in micro-panel data and does not invalidate fixed-effects estimation, which relies on large-sample consistency rather than normally distributed errors.
 Overall, the diagnostic results support the validity of the fixed-effects model with robust standard errors.
 
+### Multicollinearity (Variance Inflation Factor)
+A Variance Inflation Factor (VIF) test was conducted to assess multicollinearity among the explanatory variables. All VIF values were below 2, indicating negligible multicollinearity and confirming that the regression coefficients are stable and reliably estimated.
 
 ## Repository Structure
 * `data/` raw dataset
