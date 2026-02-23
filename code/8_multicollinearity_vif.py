@@ -1,20 +1,12 @@
-# -------------------------------------------
-# MULTICOLLINEARITY CHECK (VIF)
-# -------------------------------------------
-
 import pandas as pd
 from statsmodels.stats.outliers_influence import variance_inflation_factor
 from statsmodels.api import add_constant
 
-# -----------------------
 # LOAD DATA
-# -----------------------
 file_path = '../data/Financial_Irregularities.xlsx'
 data = pd.read_excel(file_path)
 
-# -----------------------
 # SELECT VARIABLES
-# -----------------------
 columns_to_keep = [
     'Financial Irregularities(1=yes,0=no)',
     'League Standing',
@@ -38,17 +30,13 @@ data.rename(columns={
     'Goal Ratio(Goals scored/Goals conceded)': 'Goal Ratio'
 }, inplace=True)
 
-# -----------------------
 # INDEPENDENT VARIABLES ONLY
-# -----------------------
 X = data.drop(columns=['League Standing'])
 
 # Add constant
 X = add_constant(X)
 
-# -----------------------
 # COMPUTE VIF
-# -----------------------
 vif = pd.DataFrame()
 vif["Variable"] = X.columns
 vif["VIF"] = [variance_inflation_factor(X.values, i) for i in range(X.shape[1])]
