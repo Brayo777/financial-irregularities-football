@@ -1,5 +1,3 @@
-# ROBUSTNESS CHECKS - CLUSTERED STANDARD ERRORS
-
 import pandas as pd
 from linearmodels.panel import PanelOLS
 from statsmodels.api import add_constant
