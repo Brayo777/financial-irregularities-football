@@ -4,14 +4,10 @@ import pandas as pd
 from linearmodels.panel import PanelOLS
 from statsmodels.api import add_constant
 
-# -----------------------
 # LOAD DATA
-# -----------------------
-data = pd.read_excel('../data/Financial Irregularities.xlsx')
+data = pd.read_excel('../data/Financial_Irregularities.xlsx')
 
-# -----------------------
 # CLEAN VARIABLES
-# -----------------------
 columns_to_keep = [
     'Team Name','Season',
     'Financial Irregularities(1=yes,0=no)',
@@ -35,13 +31,11 @@ data.rename(columns={
     'Goal Ratio(Goals scored/Goals conceded)': 'Goal Ratio'
 }, inplace=True)
 
-# panel index
+# PANEL INDEX
 data['Season'] = data['Season'].map(lambda x: pd.to_datetime('20' + x.split('/')[1] + '-05-31'))
 data.set_index(['Team Name','Season'], inplace=True)
 
-# -----------------------
 # MODEL
-# -----------------------
 y = data['League Standing']
 X = data[['Financial Irregularity','Net Profit Margin','Firm Size','Leverage','Growth','Return on Equity','Goal Ratio']]
 X = add_constant(X)
