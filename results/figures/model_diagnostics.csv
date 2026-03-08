@@ -1,0 +1,4 @@
+Test,Value
+Durbin-Watson,1.8596389449112274
+Breusch-Pagan p-value,0.25470723967985
+Shapiro-Wilk p-value,1.6197022271989703e-09
