@@ -1,0 +1,4 @@
+Hausman Test Results
+Statistic: 17.3964
+Degrees of freedom: 8
+P-value: 0.026236
