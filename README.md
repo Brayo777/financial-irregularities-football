@@ -149,5 +149,5 @@ Run the full analysis pipeline:
 python code/run_all.py
 ```
 
-All tables and figures will be generated in the **results/** folder.
+All tables and figures will be automatically generated in the `results/` folder within the local project directory.
 
