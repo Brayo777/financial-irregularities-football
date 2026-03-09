@@ -1,12 +1,38 @@
-This folder contains all Python scripts used in the empirical analysis,
-including data preparation, panel regression models, Hausman test,
-diagnostic tests, and robustness checks.
+# Code
+
+This folder contains all Python scripts used in the empirical analysis for the dissertation.
+
+The scripts implement the full econometric pipeline including:
+
+- Data preparation
+- Descriptive statistics
+- Correlation analysis
+- Stationarity (ADF) tests
+- Fixed Effects and Random Effects panel regression models
+- Hausman specification test
+- Diagnostic testing
+- Robustness checks
+
+---
 
 ## Reproducing the Results
+
 Clone the repository:
+
+```
 git clone https://github.com/Brayo777/financial-irregularities-football.git
-Install dependencies:
+```
+
+Install the required Python packages:
+
+```
 pip install -r requirements.txt
-Run the full pipeline:
+```
+
+Run the full analysis pipeline:
+
+```
 python code/run_all.py
-All tables and figures will be automatically generated in the `results/` folder.
+```
+
+All tables and figures will be automatically generated in the `results/` folder in the local project directory.
